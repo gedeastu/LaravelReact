@@ -1,21 +1,33 @@
 import './bootstrap';
-import '../css/app.css';
+import React from 'react'
+import RootLayout from './layouts/RootLayout';
+import ShopPage from './pages/ShopPage';
+import ExplorePage from './pages/ExplorePage';
+import ReactDOM from 'react-dom/client';
+import {
+  createBrowserRouter, 
+  Route,
+  createRoutesFromElements,
+  RouterProvider
+} 
+from 'react-router-dom'
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<RootLayout/>}>
+      <Route index element={<ShopPage/>}/>
+      <Route path='/Explore' element={<ExplorePage/>}/>
+    </Route>
+  )
+)
+const container = document.getElementById('App')
+const App = () => {
+  return (
+    <>
+    <RouterProvider router={router}/>
+    </>
+  )
+}
 
-import { createRoot } from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/react';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
-createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
-    setup({ el, App, props }) {
-        const root = createRoot(el);
-
-        root.render(<App {...props} />);
-    },
-    progress: {
-        color: '#4B5563',
-    },
-});
+export default App
+const root = ReactDOM.createRoot(container);
+root.render(<App/>)
