@@ -11,6 +11,10 @@ import {
   RouterProvider
 } 
 from 'react-router-dom'
+import { QueryClientProvider,QueryClient,useQuery } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+const queryClient = new QueryClient();
+// console.log(queryClient)
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout/>}>
@@ -19,15 +23,18 @@ const router = createBrowserRouter(
     </Route>
   )
 )
-const container = document.getElementById('App')
+// const container = document.getElementById('App')
 const App = () => {
   return (
     <>
     <RouterProvider router={router}/>
+    {/* <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/> */}
     </>
+    // <QueryClientProvider client={queryClient}>
+    // </QueryClientProvider>
   )
 }
 
 export default App
-const root = ReactDOM.createRoot(container);
-root.render(<App/>)
+// const root = ReactDOM.createRoot(container);
+// root.render(<App/>)
