@@ -10,4 +10,12 @@ export default defineConfig({
         }),
         react(),
     ],
+    optimizeDeps: {
+        exclude: ['js-big-decimal']
+    },
+    server: {
+        hmr: {
+            host: 'localhost',
+        },
+      }
 });
